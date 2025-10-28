@@ -10,6 +10,13 @@ CLEAN_PATH = "data/clean/clean_sensor_data.csv"
 LOG_PATH = "data/clean/validation_log.txt"
 LAST_RUN_PATH = "data/clean/last_run.txt"
 
+user = "postgres"
+password = "12345Yh890909'."
+host = "localhost"
+port = 5432
+database = "sensor_data"
+
+
 os.makedirs("data/clean", exist_ok=True)
 
 def get_last_processed_line():
@@ -68,10 +75,10 @@ def validate_and_clean(df: pd.DataFrame):
     return df, log
 
 def save_to_db(df):
-    engine = create_engine("postgresql://postgres:YOUR_PASSWORD@localhost:5432/sensor_data")
+    connection_url = f"postgresql://{user}:{password}@{host}:{port}/{database}"
+    engine = create_engine(connection_url)
     df.to_sql("sensor_readings", engine, if_exists="append", index=False)
     print(f"Inserted {len(df)} rows into PostgreSQL.")
-
 
 def main():
     print("Starting ETL process...")
