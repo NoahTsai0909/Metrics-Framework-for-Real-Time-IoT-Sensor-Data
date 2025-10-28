@@ -34,7 +34,8 @@ if df.empty:
 col1, col2, col3 = st.columns(3)
 col1.metric("Average Temperature (°C)", f"{df['temperature'].mean():.2f}")
 col2.metric("Average Humidity (%)", f"{df['humidity'].mean():.2f}")
-col3.metric("Latest Reading Time", df['timestamp'].max())
+col3.metric("Latest Reading Time", df['timestamp'].max().strftime("%Y-%m-%d %H:%M:%S"))
+
 
 st.divider()
 
