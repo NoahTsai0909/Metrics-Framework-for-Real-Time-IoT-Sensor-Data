@@ -70,7 +70,7 @@ def validate_and_clean(df: pd.DataFrame):
     log.append(f"Dropped {before - len(df)} duplicate rows.")
 
     #Handle missing data
-    df = df.fillna(method="ffill")
+    df = df.ffill()
 
     return df, log
 
