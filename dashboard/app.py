@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from sqlalchemy import create_engine
+from streamlit_autorefresh import st_autorefresh
+
 
 #DATABASE CONNECTION
 user = "postgres"
@@ -16,6 +18,8 @@ engine = create_engine(f"postgresql://{user}:{password}@{host}:{port}/{database}
 st.set_page_config(page_title="IoT Sensor Dashboard", layout="wide")
 
 st.title("📊 IoT Sensor Data Dashboard")
+
+st_autorefresh(interval=30 * 1000, key="refresh_dashboard")
 
 #LOAD DATA
 @st.cache_data(ttl=60)
